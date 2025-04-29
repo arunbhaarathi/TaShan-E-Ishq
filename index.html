@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TaShan-ए-Ishq</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* Global Styles and Flex Centering */
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #FFC1E3, #B3E5FC);
+      margin: 0;
+      padding: 20px;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow-y: auto;
+    }
+    /* Container with responsive sizing and extra bottom padding */
+    .container {
+      width: 90%;
+      max-width: 600px;
+      background: #fff;
+      border-radius: 10px;
+      padding: 30px 30px 80px; /* reserve space at bottom */
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    h1, h2, h3, p {
+      margin-bottom: 15px;
+    }
+    h1, h2 {
+      font-family: 'Dancing Script', cursive;
+      color: #D81B60;
+      font-size: 2.5rem;
+    }
+    p {
+      font-size: 1.125rem;
+      color: #555;
+      line-height: 1.6;
+    }
+    button, a.button-link {
+      display: block;
+      width: 80%;
+      margin: 20px auto;
+      padding: 12px 20px;
+      background-color: #FF4081;
+      color: #fff;
+      font-size: 1.125rem;
+      text-decoration: none;
+      text-align: center;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background 0.3s;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    }
+    button:hover, a.button-link:hover {
+      background-color: #E91E63;
+    }
+    /* Options styling to align checkboxes and text */
+    .options {
+      margin: 20px 0;
+      text-align: left;
+    }
+    .options label {
+      display: block;
+      position: relative;
+      padding-left: 40px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      line-height: 1.4;
+    }
+    .options label input[type="checkbox"] {
+      position: absolute;
+      left: 0;
+      top: 0;
+      margin-top: 3px;
+    }
+    .hidden {
+      display: none;
+    }
+    /* Back-button pill, fixed bottom-center */
+    .back-btn {
+      display: inline-block;  /* shrink‐to‐fit text + padding */
+      width: auto; 
+
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff;
+      border: 2px solid #D81B60;
+      border-radius: 20px;
+      padding: 5px 7px;
+      font-size: 1rem;
+      color: #D81B60;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      line-height: 1;
+    }
+    .back-btn:hover {
+      background: #D81B60;
+      color: #fff;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+      h1, h2 { font-size: 2rem; }
+      p, .options label, button, a.button-link { font-size: 1rem; }
+      .container { padding: 20px 20px 80px; }
+      button, a.button-link { width: 90%; }
+    }
+    @media (min-width: 601px) and (max-width: 1024px) {
+      h1, h2 { font-size: 2.2rem; }
+      p, .options label, button, a.button-link { font-size: 1.125rem; }
+      .container { padding: 25px 25px 80px; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="confetti-canvas" class="hidden"></canvas>
+  <div class="container">
+    <!-- Page 1: Welcome -->
+    <div id="page1">
+      <h1>Dear Panda &amp; Raksha 🐼💖</h1>
+      <p>We’re honestly at a loss for words to describe how thrilled we are about your wedding—our hearts are bursting with joy! 😍💫 (And yes, our emoji supply is running dangerously low!) We’re so excited to celebrate this beautiful new beginning with you both! As you step into this wonderful journey together, we wish you a lifetime filled with understanding, laughter, and endless support. Here’s to building new memories and creating a future that’s even brighter than you imagined! 🥂✨</p>
+      <p>Raksha, we’re absolutely delighted to welcome you into our family! 💖🎉</p>
+      <p>With all our love,<br>AB, Giri, Hindhs, SP, and Surya 💕</p>
+      <p>Ready to unwrap a little digital surprise from us? 🎁 Click below to discover your wedding present and add an extra sparkle to your special day! ✨</p>
+      <button id="startBtn">Let the Magic Begin! 🪄</button>
+    </div>
+    <!-- Page 2: Teaser -->
+    <div id="page2" class="hidden">
+      <h2>Decisions, Decisions... 🤔✨</h2>
+      <p>We wanted your wedding gift to be truly special, so after many hours of discussions and a number of sleepless nights... okay, it wasn't as difficult as it sounds—but yes, to an extent! We finally found the perfect idea.</p>
+      <p>We’d love to send you both on a memorable honeymoon adventure—but we need your help choosing the destination! 🌍✈️</p>
+      <p>Are you ready to help us make this trip unforgettable?</p>
+      <button id="beginBtn">Let’s Go! 🚀</button>
+      <button class="back-btn" data-target="page1">Go Back</button>
+    </div>
+    <!-- Page 3: Scenic -->
+    <div id="page3" class="hidden">
+      <h2>Unleash Your Inner Honeymoon Rebel 😎🌴</h2>
+      <h3>Scenic Shenanigans 🌄</h3>
+      <p>Let’s start with the views! What kind of landscape makes your heart skip a beat and your camera roll overflow? 😍📸 (Select all that call out to you!)</p>
+      <div class="options">
+        <label><input type="checkbox" name="q1" value="beach"><strong>Beachy Keen:</strong> Endless sandy shores and ocean breezes to get your toes in. 🏖️🌊</label>
+        <label><input type="checkbox" name="q1" value="hill"><strong>Hill-Top Thrills:</strong> Rolling hills that promise scenic views—and maybe a little impromptu hilltop dancing. ⛰️🕺</label>
+        <label><input type="checkbox" name="q1" value="snow"><strong>Snow Much Fun:</strong> A winter wonderland for those who like their romance with a side of frosty adventure. ❄️⛷️</label>
+      </div>
+      <button id="nextBtnQ1">Next ➡️</button>
+      <button class="back-btn" data-target="page2">Go Back</button>
+    </div>
+    <!-- Page 4: Hijinks -->
+    <div id="page4" class="hidden">
+      <h2>Honeymoon Hijinks 🥳💑</h2>
+      <p>Time to dream a little! How do you picture spending your first days together as newlyweds? (Pick as many as you like—no wrong answers here! 😄)</p>
+      <div class="options">
+        <label><input type="checkbox" name="q2" value="couch"><strong>Couch Potatoes Unite:</strong> Snuggle up in your room, order in, and let the world wait. 🛋️🍕</label>
+        <label><input type="checkbox" name="q2" value="cultural"><strong>Cultural Crusaders:</strong> Roam the streets, get lost in local traditions, and maybe even learn a few saucy phrases. 🕌🗺️</label>
+        <label><input type="checkbox" name="q2" value="adrenaline"><strong>Adrenaline Addicts:</strong> Seek thrills, dive into wild adventures, and make memories that will leave you laughing (and maybe a little out of breath). 🎢🏄‍♂️</label>
+      </div>
+      <button id="nextBtnQ2">Next ➡️</button>
+      <button class="back-btn" data-target="page3">Go Back</button>
+    </div>
+    <!-- Page 5: Indian Zones -->
+    <div id="page5" class="hidden">
+      <h2>Indian Adventure Zones 🇮🇳✨</h2>
+      <p>India has so many treasures to explore! Which region calls out to your inner traveler for this honeymoon adventure? (Pick as many as you like! 🗺️💖)</p>
+      <div class="options">
+        <label><input type="checkbox" name="q3" value="northern"><strong>Northern Nuances:</strong> Rugged mountains, ancient forts, and stories as tall as the peaks. 🏔️🏰</label>
+        <label><input type="checkbox" name="q3" value="southern"><strong>Southern Sensations:</strong> Lush landscapes, serene coastlines, and a culinary scene that’s as rich as its history. 🌴🏖️🍛</label>
+        <label><input type="checkbox" name="q3" value="eastern"><strong>Eastern Escapades:</strong> A vibrant mix of culture, colors, and quirky local surprises. 🐯🎨</label>
+        <label><input type="checkbox" name="q3" value="western"><strong>Western Wonders:</strong> Diverse terrains that promise a cocktail of experiences—shaken, not stirred. 🏜️🥥</label>
+      </div>
+      <button id="nextBtnQ3">Next ➡️</button>
+      <button class="back-btn" data-target="page4">Go Back</button>
+    </div>
+    <!-- Page 6: Lodging -->
+    <div id="page6" class="hidden">
+      <h2>Lodging with Attitude 🏨💤</h2>
+      <p>Time to pick your dream stay! What’s your ideal vibe when it comes to where you’ll be resting, relaxing, and maybe even dancing in your pajamas? (Choose all that feel just right! 🛏️✨)</p>
+      <div class="options">
+        <label><input type="checkbox" name="q4" value="chic"><strong>Chic Boutique:</strong> Intimate spaces that whisper luxury—and maybe a bit of mischief. 🛎️💎</label>
+        <label><input type="checkbox" name="q4" value="all-inclusive"><strong>All-Inclusive Extravaganza:</strong> Pampering to the max with zero worries (and plenty of room service perks). 🥂🍽️</label>
+        <label><input type="checkbox" name="q4" value="homestay"><strong>Homestay with Heart:</strong> Cozy, quirky, and full of local flavor that feels like coming home. 🏡❤️</label>
+      </div>
+      <button id="nextBtnQ4">Next ➡️</button>
+      <button class="back-btn" data-target="page5">Go Back</button>
+    </div>
+    <!-- Page 7: Pace -->
+    <div id="page7" class="hidden">
+      <h2>Pace of the Playdate 🎶⏰</h2>
+      <p>Every couple has their own vacation groove! What pace sounds perfect for your honeymoon adventure? (Pick as many as you like—there’s no wrong answer! 😎💃)</p>
+      <div class="options">
+        <label><input type="checkbox" name="q5" value="slow"><strong>Slow &amp; Sultry:</strong> A laid-back escape where time takes a backseat to romance. 🐢🌙</label>
+        <label><input type="checkbox" name="q5" value="fast"><strong>Fast &amp; Furious:</strong> An itinerary packed with so much fun you’ll need to catch your breath. 🏃‍♂️🎢</label>
+        <label><input type="checkbox" name="q5" value="sweet"><strong>Sweet Spot:</strong> A perfect blend of lazy mornings, wild afternoons, and steamy nights. 🥰🌅🌠</label>
+      </div>
+      <button id="nextBtnQ5">Next ➡️</button>
+      <button class="back-btn" data-target="page6">Go Back</button>
+    </div>
+    <!-- Page 8: Summary -->
+    <div id="page8" class="hidden">
+      <h2>Thank You! 🎉❤️</h2>
+      <p>Your honeymoon adventure is all set! Here’s a quick look at your choices: 👀✨</p>
+      <div id="summary"></div>
+      <p>Time to pack your bags, charge your cameras, and get ready for memories that will last a lifetime! 🧳📸🌍</p>
+      <p>
+        (P.S. — We couldn’t add an email feature, so please take a screenshot of your selections and share it with us! 😅🙏  
+        We will make all the bookings according to your preference and share them with you at the earliest.)
+      </p>
+      
+      <button id="restartBtn">Start Over 🔄</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+  <script>
+    // Confetti
+    function triggerPartyPoppers() {
+      confetti({ particleCount: 50, spread: 80, origin: { x: 0.5, y: 0.5 } });
+    }
+
+    // Navigation
+    document.getElementById('startBtn').addEventListener('click', () => {
+      document.getElementById('page1').classList.add('hidden');
+      document.getElementById('page2').classList.remove('hidden');
+    });
+    document.getElementById('beginBtn').addEventListener('click', () => {
+      document.getElementById('page2').classList.add('hidden');
+      document.getElementById('page3').classList.remove('hidden');
+    });
+
+    // Helpers
+    function validateCheckboxes(name, msg) {
+      if (!document.querySelector(`input[name="${name}"]:checked`)) {
+        alert(msg);
+        return false;
+      }
+      return true;
+    }
+    function getSelections(name) {
+      return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`))
+                  .map(el => el.parentNode.textContent.trim())
+                  .join(', ');
+    }
+
+    // Question navigation
+    document.getElementById('nextBtnQ1').addEventListener('click', () => {
+      if (!validateCheckboxes('q1', 'Please select at least one option.')) return;
+      document.getElementById('page3').classList.add('hidden');
+      document.getElementById('page4').classList.remove('hidden');
+    });
+    document.getElementById('nextBtnQ2').addEventListener('click', () => {
+      if (!validateCheckboxes('q2', 'Please select at least one option.')) return;
+      document.getElementById('page4').classList.add('hidden');
+      document.getElementById('page5').classList.remove('hidden');
+    });
+    document.getElementById('nextBtnQ3').addEventListener('click', () => {
+      if (!validateCheckboxes('q3', 'Please select at least one option.')) return;
+      document.getElementById('page5').classList.add('hidden');
+      document.getElementById('page6').classList.remove('hidden');
+    });
+    document.getElementById('nextBtnQ4').addEventListener('click', () => {
+      if (!validateCheckboxes('q4', 'Please select at least one option.')) return;
+      document.getElementById('page6').classList.add('hidden');
+      document.getElementById('page7').classList.remove('hidden');
+    });
+    document.getElementById('nextBtnQ5').addEventListener('click', () => {
+      if (!validateCheckboxes('q5', 'Please select at least one option.')) return;
+      const summary = document.getElementById('summary');
+      summary.innerHTML = `
+        <p><strong>Scenic Shenanigans:</strong> ${getSelections('q1')}</p>
+        <p><strong>Honeymoon Hijinks:</strong> ${getSelections('q2')}</p>
+        <p><strong>Indian Adventure Zones:</strong> ${getSelections('q3')}</p>
+        <p><strong>Lodging with Attitude:</strong> ${getSelections('q4')}</p>
+        <p><strong>Pace of the Playdate:</strong> ${getSelections('q5')}</p>
+      `;
+      document.getElementById('page7').classList.add('hidden');
+      document.getElementById('page8').classList.remove('hidden');
+      triggerPartyPoppers();
+    });
+
+    // Restart
+    document.getElementById('restartBtn').addEventListener('click', () => {
+      location.reload();
+    });
+
+    // Back buttons
+    document.querySelectorAll('.back-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const prev = btn.getAttribute('data-target');
+        btn.closest('div[id^="page"]').classList.add('hidden');
+        document.getElementById(prev).classList.remove('hidden');
+      });
+    });
+  </script>
+</body>
+</html>
